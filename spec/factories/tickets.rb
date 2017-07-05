@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :ticket do
     title "MyString"
-    description "MyText"
+    description "An example ticket, nothing more"
     project nil
   end
 end
