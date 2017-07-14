@@ -6,4 +6,5 @@ end
 
 RSpec.configure do |c|
   c.include AuthorizationHelpers, :type => :feature
+  c.include AuthorizationHelpers, :type => :controller
 end
