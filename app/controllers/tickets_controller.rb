@@ -4,6 +4,7 @@ class TicketsController < ApplicationController
   before_action :set_project
   before_action :set_ticket, only: [ :show, :edit, :update, :destroy ]
   before_action :authorize_create!, only: [ :new, :create ]
+  before_action :authorize_update!, only: [ :edit, :update ]
 
   def show
   end
@@ -59,6 +60,12 @@ class TicketsController < ApplicationController
   def authorize_create!
     if !current_user.admin? && cannot?('create tickets'.to_sym, @project)
       redirect_to @project, alert: 'You cannot create tickets on this project.'
+    end
+  end
+
+  def authorize_update!
+    if !current_user.admin? && cannot?('edit tickets'.to_sym, @project)
+      redirect_to @project, alert: 'You cannot edit tickets on this project.'
     end
   end
 
