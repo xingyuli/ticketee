@@ -46,11 +46,9 @@ class ProjectsController < ApplicationController
   private
 
   def set_project
-    begin
-      @project = Project.for(current_user).find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to projects_path, alert: 'The project you were looking for could not be found.'
-    end
+    @project = Project.for(current_user).find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to projects_path, alert: 'The project you were looking for could not be found.'
   end
 
   def project_params
