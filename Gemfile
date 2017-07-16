@@ -33,6 +33,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'cancancan', '~> 2.0'
 
+gem 'carrierwave', '~> 1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
