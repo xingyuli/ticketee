@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716145200) do
+ActiveRecord::Schema.define(version: 20170717144206) do
+
+  create_table "assets", force: :cascade do |t|
+    t.string "asset"
+    t.integer "ticket_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "content_type"
+    t.index ["ticket_id"], name: "index_assets_on_ticket_id"
+  end
 
   create_table "permissions", force: :cascade do |t|
     t.integer "user_id"
@@ -35,7 +44,6 @@ ActiveRecord::Schema.define(version: 20170716145200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "asset"
     t.index ["project_id"], name: "index_tickets_on_project_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
