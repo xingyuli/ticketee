@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717144206) do
+ActiveRecord::Schema.define(version: 20170719141824) do
 
   create_table "assets", force: :cascade do |t|
     t.string "asset"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20170717144206) do
     t.datetime "updated_at", null: false
     t.string "content_type"
     t.index ["ticket_id"], name: "index_assets_on_ticket_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "text"
+    t.integer "ticket_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_comments_on_ticket_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "permissions", force: :cascade do |t|

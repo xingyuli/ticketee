@@ -8,6 +8,7 @@ class TicketsController < ApplicationController
   before_action :authorize_delete!, only: :destroy
 
   def show
+    @comment = @ticket.comments.build
   end
 
   def new
