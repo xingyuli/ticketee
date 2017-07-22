@@ -12,6 +12,15 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <style type="text/css">
+      <% @states.each do |state| %>
+      .state_<%= state.name.parameterize %> {
+        background: <%= state.background %>;
+        color: <%= state.color %>;
+      }
+      <% end %>
+    </style>
+
     <%= javascript_include_tag 'application' %>
   </head>
 

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_action :find_states
+
   private
 
   def require_signin!
@@ -21,6 +23,10 @@ class ApplicationController < ActionController::Base
     unless current_user.admin?
       redirect_to root_path, alert: 'You must be an admin to do that.'
     end
+  end
+
+  def find_states
+    @states = State.all
   end
 
 end
