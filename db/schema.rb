@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720134118) do
+ActiveRecord::Schema.define(version: 20170722062419) do
 
   create_table "assets", force: :cascade do |t|
     t.string "asset"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170720134118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "state_id"
+    t.integer "previous_state_id"
     t.index ["ticket_id"], name: "index_comments_on_ticket_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
