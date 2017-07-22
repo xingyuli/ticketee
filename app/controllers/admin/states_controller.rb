@@ -13,7 +13,7 @@ class Admin::StatesController < Admin::BaseController
   def create
     state = State.new(state_params)
     if state.save
-      redirect_to admin_users_path, notice: 'State has been created.'
+      redirect_to admin_states_path, notice: 'State has been created.'
     else
       flash[:alert] = 'State has not been created.'
       render 'new'
