@@ -7,7 +7,11 @@ Rails.application.routes.draw do
       put 'permissions', to: 'permissions#set',
                          as: 'set_permissions'
     end
-    resources :states
+    resources :states do
+      member do
+        get :make_default
+      end
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

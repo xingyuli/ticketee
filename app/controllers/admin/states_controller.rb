@@ -7,7 +7,10 @@ class Admin::StatesController < Admin::BaseController
     @state = State.new
   end
 
-  def edit
+  def make_default
+    @state = State.find(params[:id])
+    @state.default!
+    redirect_to admin_states_path, notice: "#{@state.name} is now the default state."
   end
 
   def create
