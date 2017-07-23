@@ -6,8 +6,8 @@ class Comment < ApplicationRecord
 
   belongs_to :ticket
   belongs_to :user
-  belongs_to :previous_state, class_name: 'State', optional: true
-  belongs_to :state
+  belongs_to :previous_state, optional: true, class_name: 'State'
+  belongs_to :state, optional: true
 
   validates :text, presence: true
 
