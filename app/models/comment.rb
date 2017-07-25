@@ -1,15 +1,18 @@
 class Comment < ApplicationRecord
   before_create :set_previous_state
   after_create :set_ticket_state
+  after_create :associate_tags_with_ticket
 
   delegate :project, to: :ticket
+
+  validates :text, presence: true
 
   belongs_to :ticket
   belongs_to :user
   belongs_to :previous_state, optional: true, class_name: 'State'
   belongs_to :state, optional: true
 
-  validates :text, presence: true
+  attr_accessor :tag_names
 
   private
 
@@ -20,6 +23,14 @@ class Comment < ApplicationRecord
   def set_ticket_state
     ticket.state = state
     ticket.save!
+  end
+
+  def associate_tags_with_ticket
+    if tag_names
+      tags = tag_names.split(' ').map { |name| Tag.find_or_create_by(name: name) }
+      ticket.tags += tags
+      ticket.save
+    end
   end
 
 end
