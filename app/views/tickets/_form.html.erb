@@ -18,7 +18,9 @@
       <%= f.label :description %>
       <%= f.text_area :description %>
     </p>
-    <%= render 'tags/form', :f => f %>
+    <% authorized?('tag', @project) do %>
+      <%= render 'tags/form', :f => f %>
+    <% end %>
     <% number = 0 %>
     <div id="files">
       <%= render partial: 'files/form', locals: { number: number } %>

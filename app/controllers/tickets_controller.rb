@@ -57,6 +57,9 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
+    if cannot?(:tag, @project)
+      params[:ticket].delete(:tag_names)
+    end
     params.require(:ticket).permit(:title, :description, :tag_names, assets_attributes: [:asset])
   end
 

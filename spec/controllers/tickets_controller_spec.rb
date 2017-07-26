@@ -58,6 +58,20 @@ RSpec.describe TicketsController, type: :controller do
       expect(response).to redirect_to(project)
       expect(flash[:alert]).to eql('You cannot delete tickets on this project.')
     end
+
+    it 'can create tickets, but not tag them' do
+      define_permission!(user, 'create tickets', project)
+
+      post :create, params: {
+        :ticket => {
+          :title => 'New ticket!',
+          :description => "Brand spankin' new",
+          :tag_names => 'these are tags'
+        },
+        :project_id => project.id }
+
+      expect(Ticket.last.tags).to be_empty
+    end
   end
 
 end

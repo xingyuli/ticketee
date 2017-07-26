@@ -20,6 +20,8 @@
       <%= f.select :state_id, @states.map { |s| [s.name, s.id] }, selected: @ticket.state_id %>
     </p>
   <% end %>
-  <%= render 'tags/form', :f => f %>
+  <% authorized?('tag', @project) do %>
+    <%= render 'tags/form', :f => f %>
+  <% end %>
   <%= f.submit %>
 <% end %>
