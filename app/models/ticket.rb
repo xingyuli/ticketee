@@ -1,6 +1,6 @@
 class Ticket < ApplicationRecord
   before_create :associate_tags
-  after_create :creator_watches_me
+  before_create :creator_watches_me
 
   validates :title, presence: true
   validates :description, presence: true, length: { minimum: 10 }
@@ -27,7 +27,6 @@ class Ticket < ApplicationRecord
     end
   end
 
-  # TODO duplication caused by two inserts
   def creator_watches_me
     if user
       watchers << user unless watchers.include?(user)

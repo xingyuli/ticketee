@@ -35,8 +35,6 @@ class Comment < ApplicationRecord
   end
 
   def send_mail_to_watchers
-    puts ">>> Call send_mail_to_watchers, excludes #{user}"
-    puts "TODO solve duplication caused by two inserts!!! ticket.watchers are: #{ticket.watchers.size} #{ticket.watchers.as_json}"
     (ticket.watchers - [user]).each do |user|
       NotifierMailer.comment_updated(self, user).deliver
     end
