@@ -33,4 +33,25 @@ feature 'Ticket Notifications' do
     end
   end
 
+  scenario 'Comment authors are automatically subscribed to a ticket' do
+    click_link project.name
+    click_link ticket.title
+    fill_in 'comment_text', with: 'Is it out yet?'
+    click_button 'Create Comment'
+    expect(page).to have_content('Comment has been created.')
+    find_email!(alice.email)
+    click_link 'Sign Out'
+
+    reset_mailer
+
+    sign_in_as!(alice)
+    click_link project.name
+    click_link ticket.title
+    fill_in 'comment_text', with: 'Not Yet!'
+    click_button 'Create Comment'
+    expect(page).to have_content('Comment has been created.')
+    find_email!(bob.email)
+    expect { find_email!(alice.email) }.to raise_error(EmailSpec::CouldNotFindEmailError)
+  end
+
 end

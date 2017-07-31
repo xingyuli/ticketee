@@ -3,6 +3,7 @@ class Comment < ApplicationRecord
   after_create :set_ticket_state
   after_create :associate_tags_with_ticket
   after_create :send_mail_to_watchers
+  after_create :creator_watches_ticket
 
   delegate :project, to: :ticket
 
@@ -38,6 +39,10 @@ class Comment < ApplicationRecord
     (ticket.watchers - [user]).each do |user|
       NotifierMailer.comment_updated(self, user).deliver
     end
+  end
+
+  def creator_watches_ticket
+    ticket.watchers << user unless ticket.watchers.include?(user)
   end
 
 end
