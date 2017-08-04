@@ -9,6 +9,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
+gem 'responders'
 gem 'record_tag_helper', '~> 1.0'
 gem 'jquery-rails'
 # Use sqlite3 as the database for Active Record
@@ -33,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# gem 'devise'
 gem 'cancancan', '~> 2.0'
 
 gem 'carrierwave', '~> 1.0'
