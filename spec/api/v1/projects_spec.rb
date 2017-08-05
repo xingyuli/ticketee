@@ -18,8 +18,6 @@ RSpec.describe '/api/v1/projects', type: :api do
     end
 
     it 'json' do
-      puts "token is: #{token}"
-
       get "#{url}.json", token: token
 
       projects_json = Project.for(user).all.to_json
