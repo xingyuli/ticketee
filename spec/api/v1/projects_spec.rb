@@ -87,4 +87,33 @@ RSpec.describe '/api/v1/projects', type: :api do
     end
   end
 
+  context 'updating a project' do
+
+    before do
+      user.admin = true
+      user.save
+    end
+
+    let(:url) { "/api/v1/projects/#{project.id}" }
+
+    it 'successful JSON' do
+      put "#{url}.json", token: user.authentication_token, project: { name: 'Not Ticketee' }
+
+      expect(last_response.status).to eql(204)
+      expect(last_response.body).to eql('')
+
+      project.reload
+      expect(project.name).to eql('Not Ticketee')
+    end
+
+    it 'unsuccessful JSON' do
+      put "#{url}.json", token: user.authentication_token, project: { name: '' }
+
+      expect(last_response.status).to eql(422)
+
+      errors = { 'errors': { 'name': ["can't be blank"] } }
+      expect(last_response.body).to eql(errors.to_json)
+    end
+  end
+
 end
