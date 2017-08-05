@@ -38,4 +38,30 @@ RSpec.describe '/api/v1/projects', type: :api do
     end
   end
 
+  context 'creating a project' do
+    let(:url) { '/api/v1/projects' }
+
+    it 'successful JSON' do
+      post "#{url}.json", token: token, project: { name: 'Inspector' }
+      project = Project.find_by_name!('Inspector')
+
+      expect(last_response.status).to eql(201)
+      expect(last_response.headers['Location']).to eql("/api/v1/projects/#{project.id}")
+      expect(last_response.body).to eql(project.to_json)
+    end
+
+    it 'unsuccessful JSON' do
+      post "#{url}.json", token: token, project: { name: '' }
+
+      expect(last_response.status).to eql(422)
+
+      errors = {
+        'errors': {
+          'name': ["can't be blank"]
+        }
+      }.to_json
+      expect(last_response.body).to eql(errors)
+    end
+  end
+
 end
