@@ -28,6 +28,14 @@ RSpec.describe '/api/v1/projects', type: :api do
       expect(projects.any? { |p| p['name'] == project.name }).to be_truthy
       expect(projects.any? { |p| p['name'] == 'Access Denied' }).to be_falsey
     end
+
+    it 'XML' do
+      get "#{url}.xml", token: token
+      expect(last_response.body).to eql(Project.for(user).to_xml)
+
+      projects = Nokogiri::XML(last_response.body)
+      expect(projects.css('project name').text).to eql(project.name)
+    end
   end
 
 end
