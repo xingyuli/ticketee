@@ -18,14 +18,9 @@ class User < ApplicationRecord
   def ensure_authentication_token
     unless authentication_token
       payload = { sub: email, exp: Time.now.to_i + 3 * 24 * 3600 }
-      token = JWT.encode(payload, self.class.hmac_secret, 'HS256')
+      token = JWT.encode(payload, Rails.application.secrets.hmac_secret, 'HS256')
       self.authentication_token = token
     end
-  end
-
-  # TODO any better place?
-  def self.hmac_secret
-    'Jh23*$am1'
   end
 
 end
