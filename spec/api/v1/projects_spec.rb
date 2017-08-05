@@ -17,12 +17,12 @@ RSpec.describe '/api/v1/projects', type: :api do
       FactoryGirl.create(:project, name: 'Access Denied')
     end
 
-    it 'json' do
+    it 'JSON' do
       get "#{url}.json", token: token
 
       projects_json = Project.for(user).all.to_json
-      expect(last_response.body).to eql(projects_json)
       expect(last_response.status).to eql(200)
+      expect(last_response.body).to eql(projects_json)
 
       projects = JSON.parse(last_response.body)
       expect(projects.any? { |p| p['name'] == project.name }).to be_truthy
@@ -66,6 +66,24 @@ RSpec.describe '/api/v1/projects', type: :api do
         }
       }.to_json
       expect(last_response.body).to eql(errors)
+    end
+  end
+
+  context 'show' do
+    let(:url) { "/api/v1/projects/#{project.id}" }
+
+    before do
+      FactoryGirl.create(:ticket, user: user, project: project)
+    end
+
+    it 'JSON' do
+      get "#{url}.json", token: token
+      project_json = project.to_json(methods: 'last_ticket')
+      expect(last_response.status).to eql(200)
+      expect(last_response.body).to eql(project_json)
+
+      project_response = JSON.parse(last_response.body)
+      expect(project_response['last_ticket']['title']).not_to be_blank
     end
   end
 
