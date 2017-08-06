@@ -16,4 +16,8 @@ class Project < ApplicationRecord
     tickets.last
   end
 
+  def title
+    name
+  end
+
 end
