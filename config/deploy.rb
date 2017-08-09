@@ -33,3 +33,7 @@ set :deploy_to, "/home/ticketeeapp.com/apps/#{fetch(:application)}"
 # set :keep_releases, 5
 
 set :migration_role, :app
+
+before :starting, :print_path do
+  exec 'echo $PATH'
+end
