@@ -27,7 +27,7 @@ set :deploy_to, "/home/ticketeeapp.com/apps/#{fetch(:application)}"
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
-set :default_env, { path: "/usr/share/rvm/gems/ruby-2.4.0/bin:$PATH" }
+# set :default_env, { path: "/usr/share/rvm/gems/ruby-2.4.0/bin:$PATH" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
