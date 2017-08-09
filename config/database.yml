@@ -22,10 +22,10 @@ test:
 
 staging:
   adapter: postgresql
-  database: ticketeeapp.coom
+  database: ticketeeapp.com
   min_messages: warning
 
 production:
   adapter: postgresql
-  database: ticketeeapp.coom
+  database: ticketeeapp.com
   min_messages: warning
