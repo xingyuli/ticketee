@@ -13,8 +13,6 @@ gem 'activemodel-serializers-xml'
 gem 'responders'
 gem 'record_tag_helper', '~> 1.0'
 gem 'jquery-rails'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -43,9 +41,14 @@ gem 'cancancan', '~> 2.0'
 gem 'carrierwave', '~> 1.0'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', '~> 1.3', group: :development
+
+gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
 
 group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -66,6 +69,10 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'email_spec'
+end
+
+group :staging, :production do
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -20,6 +20,12 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+staging:
+  adapter: postgresql
+  database: ticketeeapp.coom
+  min_messages: warning
+
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: ticketeeapp.coom
+  min_messages: warning
