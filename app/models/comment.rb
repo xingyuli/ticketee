@@ -36,9 +36,7 @@ class Comment < ApplicationRecord
   end
 
   def send_mail_to_watchers
-    (ticket.watchers - [user]).each do |user|
-      NotifierMailer.comment_updated(self, user).deliver
-    end
+    Delayed::Job.enqueue CommentNotifierJob.new(id)
   end
 
   def creator_watches_ticket
