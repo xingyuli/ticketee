@@ -1,4 +1,4 @@
-class CommentNotifierJob < Struct.new(:comment_id)
+CommentNotifierJob = Struct.new(:comment_id) do
   def perform
     comment = Comment.find(comment_id)
     (comment.ticket.watchers - [comment.user]).each do |user|
