@@ -43,7 +43,7 @@ gem 'carrierwave', '~> 1.0'
 # Use Capistrano for deployment
 gem 'capistrano-rails', '~> 1.3', group: :development
 
-gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
+# gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
